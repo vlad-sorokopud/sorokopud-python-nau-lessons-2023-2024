@@ -22,9 +22,14 @@ from abc import ABC, ABCMeta, abstractmethod
 
 # class Entity(ABC):
 class Entity(metaclass=ABCMeta):
+
+    # size = None
+
     __metaclass__ = ABCMeta
 
     def __init__(self, idnx):
+        # self.size = s
+        # self.size2 = s2
         self._idnx = idnx  # <- instance variable (instance field)
 
     @abstractmethod
@@ -55,11 +60,19 @@ class User(Entity):
 
 if __name__ == '__main__':
     # e = Entity(1)
-    u = User(2, 'Vlad')
+    u1 = User(2, 'Vlad')
+    u2 = User(3, 'Igor')
+
+    User.priority = 7
+    u1.priority = 10
+    User.priority = 15
+
+    print(u1.priority)
+    print(u2.priority)
 
     # print(e)
     # print(u)
-    u.print()
+    # u.print()
     # print(isinstance(u, Entity))
     # print(isinstance(list, Entity))
     # print(issubclass(User, Entity))
