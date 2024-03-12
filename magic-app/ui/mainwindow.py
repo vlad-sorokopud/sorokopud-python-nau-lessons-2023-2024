@@ -4,6 +4,7 @@
 from PyQt5 import QtWidgets
 
 # local import
+import qt_tools
 from .ui_mainwindow import Ui_MainWindow
 
 
@@ -17,10 +18,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.__ui.retranslateUi(self)
 
         # set events
-        self.__ui.readButton.clicked.connect(self.__on_read_button)
+        self.__ui.loginButton.clicked.connect(self.__on_login_button)
 
-    def __on_read_button(self):
-        text = self.__ui.inputTextEdit.toPlainText()
-        self.__ui.readTextLabel.setText(f"Input text: [{text}]")
+        # set some ui elements to default
+        self.__ui.stackedWidget.setCurrentIndex(0)
+
+    def __on_login_button(self):
+        login = self.__ui.loginEdit.text()
+        password = self.__ui.passwordEdit.text()
+
+        if login == "admin" and password == "admin": # TODO Store in config/db, add hash
+            self.__ui.stackedWidget.setCurrentIndex(1)
+        else:
+            qt_tools.show_default_dialog("Wrong credentials")
+
+    def closeEvent(self, event):
+        print("On close")
 
 
