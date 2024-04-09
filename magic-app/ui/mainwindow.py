@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets
 # local import
 import qt_tools
 from .ui_mainwindow import Ui_MainWindow
+from .data_dialog_window import DataDialogWindow
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -19,6 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # set events
         self.__ui.loginButton.clicked.connect(self.__on_login_button)
+        self.__ui.openDataWindowButton.clicked.connect(self.__on_data_dialog_button)
 
         # set some ui elements to default
         self.__ui.stackedWidget.setCurrentIndex(0)
@@ -31,6 +33,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.__ui.stackedWidget.setCurrentIndex(1)
         else:
             qt_tools.show_default_dialog("Wrong credentials")
+
+    def __on_data_dialog_button(self):
+        d = DataDialogWindow()
+        d.exec()
 
     def closeEvent(self, event):
         print("On close")
